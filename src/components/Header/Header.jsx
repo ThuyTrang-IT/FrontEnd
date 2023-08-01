@@ -61,7 +61,7 @@ const Header = () => {
           </li>
           <li>
             <a
-              href="https://portal.headset-store.co.uk/returns-request/"
+              href="#"
               target="_blank"
               className="nav-link"
             >
@@ -70,7 +70,7 @@ const Header = () => {
           </li>
           <li>
             <a
-              href="https://portal.headset-store.co.uk/technical-support/"
+              href="#"
               target="_blank"
               className="nav-link"
             >
@@ -78,7 +78,7 @@ const Header = () => {
             </a>
           </li>
           <li>
-            <a href="/index/action/signin/" className="nav-link">
+            <a href="#">
               Sign In
             </a>
           </li>
