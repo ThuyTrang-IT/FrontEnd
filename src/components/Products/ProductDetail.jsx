@@ -1,12 +1,19 @@
-import React from "react";
+import Cart from "../Cart/Cart";
 import { useParams } from "react-router-dom";
 import { productsByCategory } from "../Products/data.js";
 import "./ProductDetail.scss"; // Import your custom CSS file for ProductDetail
 import ProductSingleAction from '../Products/ProductSingleAction';
+import React, { useState} from "react";
 const ProductDetail = () => {
   // Lấy thông tin categoryId và productId từ URL
   const { categoryId, productId } = useParams();
+  const [showCart, setShowCart] = useState(false);
+  
 
+  const handleShowCart = () => {
+    setShowCart(true);
+  };
+  
   // Tìm sản phẩm dựa vào categoryId và productId từ URL
   const product = productsByCategory[categoryId]?.find((item) => item.id.toString() === productId);
 
@@ -22,7 +29,11 @@ const ProductDetail = () => {
       <div className="product-detail-image">
         <img src={product.imageSrc} alt={product.label} />
         
-        <ProductSingleAction product={product} />
+        <ProductSingleAction product={product} setShowCart={setShowCart} />
+
+      {/* Show the Cart component if showCart is true */}
+      {showCart && <Cart setShowCart={setShowCart} />}
+
         
       </div>
       

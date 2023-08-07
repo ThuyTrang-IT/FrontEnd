@@ -37,6 +37,8 @@ const Header = () => {
     return navigate("/");
   };
  */
+  
+  
   const handleScroll = () => {
     const offset = window.scrollY;
     if (offset > 200) {
@@ -48,6 +50,9 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   return (
@@ -111,10 +116,11 @@ const Header = () => {
             <TbSearch onClick={() => setShowSearch(true)} />
             <AiOutlineHeart />
             <span className="cart-icon">
-              {/* here it will trigger the cart and open it */}
+              
               <CgShoppingCart onClick={() => setShowCart(true)} />
               {!!cartCount && <span>{cartCount}</span>}
-            </span>
+            </span> *
+            
           </div>
         </div>
       </nav>

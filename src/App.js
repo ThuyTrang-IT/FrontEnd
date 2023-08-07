@@ -9,6 +9,7 @@ import PageNotFound from "./components/pagenotfound/PageNotFound.jsx";
 import SuccessPage from "./components/paymentPage/SuccessPage.jsx";
 import RejectedPage from "./components/paymentPage/RejectedPage.jsx";
 import ProductDetail from "./components/Products/ProductDetail.jsx";
+import Checkout from "./components/CheckOut/CheckOut.jsx";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/product/:categoryId/:productId" element={<ProductDetail />} />
             <Route path="/success" element={<SuccessPage />} />
             <Route path="/success=false" element={<RejectedPage />} />
+            <Route exact path="/checkout" element={<Checkout/>} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Newsletter />

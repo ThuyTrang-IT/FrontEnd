@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import "./ProductSingleAction.scss"; // Import CSS file
-import { productsByCategory } from "../Products/data.js";
+import React, { useState, useContext } from "react";
+import { CreatedContext } from "../../utils/Context"; // Điều chỉnh đường dẫn đến AppContext
+import "../Products/ProductSingleAction.scss";
 
-const ProductSingleAction = ({ product }) => {
+const ProductSingleAction = ({ product,setShowCart}) => {
+  const { handleAddToCart} = useContext(CreatedContext);
   const [labelText, setLabelText] = useState("Add Headset Carry Bag");
-  const [quantity, setQuantity] = useState(1); // Khởi tạo trạng thái quantity với giá trị 1
-
+  const [quantity, setQuantity] = useState(1);
+ 
+  
   const handleChangeField = (event) => {
     const selectedValue = event.target.value;
     if (selectedValue === "327") {
@@ -25,14 +27,27 @@ const ProductSingleAction = ({ product }) => {
     setQuantity(quantity + 1);
   };
 
-  const handleAddToBasket = () => {
-    // Thay thế phần này bằng logic thực tế để thêm sản phẩm vào giỏ hàng
-    console.log("Product added to the basket");
-    // Thêm code của bạn vào đây để xử lý việc thêm sản phẩm vào giỏ hàng
+  const addToBasket = () => {
+    // Tạo object mới chứa thông tin sản phẩm
+    const newCartItem = {
+      id: product.id,
+      imageSrc: product.imageSrc,
+      attributes: {
+        title: product.label,
+        price: product.price,
+        quantity: quantity,
+      },
+    };
+    // Gọi hàm handleAddToCart để thêm sản phẩm vào giỏ hàng
+    handleAddToCart(newCartItem);
+    
+    // Mở hộp thoại Cart khi người dùng thêm sản phẩm vào giỏ hàng
+    setShowCart(true);
   };
 
   return (
     <div className="product-single-action">
+      {/* Nội dung của ProductSingleAction */}
       <div className="product-single-options">
         <div className="product-single-price">£{product.price}</div>
         <table className="options m_form">
@@ -76,7 +91,6 @@ const ProductSingleAction = ({ product }) => {
           </tbody>
         </table>
       </div>
-
       <div className="product-single-add d-flex">
         <table cellPadding="0" cellSpacing="0">
           <tbody>
@@ -93,7 +107,7 @@ const ProductSingleAction = ({ product }) => {
                   name="quantity"
                   id="pquantity"
                   className="pquantity"
-                  value={quantity} // Sử dụng biến quantity cho giá trị của input
+                  value={quantity}
                   aria-label="Qty"
                 />
                 <span
@@ -107,19 +121,8 @@ const ProductSingleAction = ({ product }) => {
           </tbody>
         </table>
       </div>
-
-      <button
-        type="submit"
-        className="button b_basket"
-        onClick={() => {
-          const formDetails = new FormData(
-            document.querySelector('form[name="details"]')
-          );
-          formDetails.append("addajax", "1");
-          const serializedForm = new URLSearchParams(formDetails).toString();
-          handleAddToBasket(serializedForm);
-        }}
-      >
+      <button className="button b_basket" onClick={addToBasket}>
+      
         Add to Basket
       </button>
     </div>

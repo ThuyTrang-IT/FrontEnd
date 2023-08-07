@@ -93,7 +93,7 @@ export const productsByCategory = {
   ],
   "usb-pc-headsets": [
     {
-      id: 1,
+      id: 3,
       imageSrc: "https://www.headset-store.co.uk/user/products/large/headsets/EPOS%20Sennheiser/epos_pc8_2023_1.jpg",
       label: "Sennheiser PC 8 USB Headset",
       price: "22.95",

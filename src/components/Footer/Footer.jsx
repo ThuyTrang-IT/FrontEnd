@@ -1,4 +1,5 @@
 import React from "react";
+import "tailwindcss/tailwind.css";
 import "./Footer.scss"; // Import the CSS file for the Footer component
 
 const Footer = () => {
