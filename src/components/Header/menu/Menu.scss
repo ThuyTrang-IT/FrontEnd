@@ -12,7 +12,7 @@
 .main-nav li {
   position: relative;
   flex: 1;
-  text-align: center; /* Align menu items in the center */
+  //text-align: center; /* Align menu items in the center */
   list-style: none;
   text-transform: uppercase;
   font-weight: bolder;
@@ -25,6 +25,23 @@
   padding: 10px;
   display: block;
   
+}
+/* Menu.scss */
+
+/* Chỉnh sửa nút Home */
+.main-nav li:first-child .nav-link {
+  display: initial;
+  align-items: center;
+  gap: 5px;
+}
+
+.main-nav li:first-child .nav-link i {
+  font-size: 16px;
+}
+
+.main-nav li:first-child .nav-link span {
+  font-size: 14px;
+  //margin-left: 5px;
 }
 
 /* Dropdown menu styles */

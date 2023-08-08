@@ -22,7 +22,6 @@ const NavDropdown = ({ title, subItems }) => {
         <ul className="dropdown-menu">
           {subItems.map((item, index) => (
             <li key={index}>
-              {/* Replace a tag with Link component */}
               <Link to={`/category/${item.id}`} className="nav-link">
                 {item.label}
               </Link>
@@ -65,10 +64,7 @@ const SiteHeaderNav = () => {
   ];
 
   useEffect(() => {
-    // Lấy danh sách các danh mục từ menuItems
     const categoriesFromMenu = menuItems.map(item => ({ id: item.label.replace(/ /g, "-").toLowerCase(), name: item.label }));
-
-    // Lưu trữ danh sách danh mục vào state
     setCategories(categoriesFromMenu);
   }, []);
 
@@ -76,16 +72,19 @@ const SiteHeaderNav = () => {
     <header>
       <nav>
         <ul className="main-nav">
+          <li>
+            <Link to="/" className="nav-link">
+              <i className="fa fa-home" aria-hidden="true"></i> Home
+            </Link>
+          </li>
           {menuItems.map((item, index) => {
             if (item.subItems) {
               return (
                 <NavDropdown key={index} title={item.label} subItems={item.subItems} />
               );
             } else {
-              // Replace a tag with Link component
               return (
                 <li key={index}>
-                  {/* Sử dụng Link component để chuyển hướng đến trang Category */}
                   <Link to={`/category/${item.label.replace(/ /g, "-").toLowerCase()}`} className="nav-link">
                     {item.label}
                   </Link>
