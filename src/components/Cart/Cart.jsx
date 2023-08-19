@@ -5,7 +5,7 @@ import { MdClose } from "react-icons/md";
 import { BsCartX } from "react-icons/bs";
 import { CreatedContext } from "../../utils/Context";
 import { loadStripe } from "@stripe/stripe-js";
-import { makePaymentRequest } from "../../utils/api";
+//import { makePaymentRequest } from "../../utils/api";
 import CartItem from "../Cart/CartItem/CartItem";
 
 // Import Tailwind CSS
@@ -19,7 +19,7 @@ const Cart = ({ setShowCart }) => {
     `${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`
   );
 
-  const handlePayment = async () => {
+  /* const handlePayment = async () => {
     try {
       const stripe = await stripePromise;
 
@@ -32,7 +32,7 @@ const Cart = ({ setShowCart }) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }; */
   const navigate = useNavigate();
 
   const handleCheckout = () => {

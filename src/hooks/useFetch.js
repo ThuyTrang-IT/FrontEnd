@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react";
 import { fetchDataFromApi } from "../utils/api";
 
-// here i am creating custom hook for calling api
 const useFetch = (endPoint) => {
   const [data, setData] = useState();
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const makeApiCallForSingleCategory = async () => {
-      const res = await fetchDataFromApi(endPoint);
-      setData(res);
+    const makeApiCall = async () => {
+      try {
+        const res = await fetchDataFromApi(endPoint);
+        setData(res);
+        setError(null); // Clear any previous error
+      } catch (error) {
+        setError(error); // Set the error state
+      }
     };
 
-    makeApiCallForSingleCategory();
+    makeApiCall();
   }, [endPoint]);
 
-  return { data };
+  return { data, error };
 };
 
 export default useFetch;

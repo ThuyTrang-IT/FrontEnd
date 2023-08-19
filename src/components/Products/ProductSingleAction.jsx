@@ -2,12 +2,11 @@ import React, { useState, useContext } from "react";
 import { CreatedContext } from "../../utils/Context"; // Điều chỉnh đường dẫn đến AppContext
 import "../Products/ProductSingleAction.scss";
 
-const ProductSingleAction = ({ product,setShowCart}) => {
-  const { handleAddToCart} = useContext(CreatedContext);
+const ProductSingleAction = ({ product, setShowCart }) => {
+  const { handleAddToCart } = useContext(CreatedContext);
   const [labelText, setLabelText] = useState("Add Headset Carry Bag");
   const [quantity, setQuantity] = useState(1);
- 
-  
+
   const handleChangeField = (event) => {
     const selectedValue = event.target.value;
     if (selectedValue === "327") {
@@ -33,17 +32,19 @@ const ProductSingleAction = ({ product,setShowCart}) => {
       id: product.id,
       imageSrc: product.imageSrc,
       attributes: {
-        title: product.label,
+        title: product.ProductName,
         price: product.price,
         quantity: quantity,
       },
     };
     // Gọi hàm handleAddToCart để thêm sản phẩm vào giỏ hàng
     handleAddToCart(newCartItem);
-    
+
     // Mở hộp thoại Cart khi người dùng thêm sản phẩm vào giỏ hàng
     setShowCart(true);
   };
+  
+  console.log("Products:", product);
 
   return (
     <div className="product-single-action">
@@ -55,7 +56,13 @@ const ProductSingleAction = ({ product,setShowCart}) => {
             <tr>
               <td>
                 <div className="form_label">
-                  <b style={{ fontSize: "20px", fontWeight: "bold", color: "black" }}>
+                  <b
+                    style={{
+                      fontSize: "20px",
+                      fontWeight: "bold",
+                      color: "black",
+                    }}
+                  >
                     <label htmlFor="additionv_97">{labelText}</label>
                   </b>
                 </div>
@@ -121,8 +128,10 @@ const ProductSingleAction = ({ product,setShowCart}) => {
           </tbody>
         </table>
       </div>
-      <button className="button b_basket" onClick={addToBasket}>
-      
+      <button
+        className="button b_basket_button-animation"
+        onClick={addToBasket}
+      >
         Add to Basket
       </button>
     </div>

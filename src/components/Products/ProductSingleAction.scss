@@ -80,7 +80,7 @@
   /* Styles for the button */
 button {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    --swiper-theme-color: #007aff;
+    --swiper-theme-color: #69e07d;
     --swiper-navigation-size: 44px;
     -webkit-text-size-adjust: 100%;
     border-spacing: 0px;
@@ -105,7 +105,7 @@ button {
     padding-right: 0;
     outline: none !important;
     width: 100%;
-    max-width: 160px;
+    max-width: 200px;
     height: 40px;
     background-color: #53A93F;
     border: none !important;
@@ -132,3 +132,51 @@ button {
   }
   /* ProductSingleAction.css */
 
+/* Thêm animation vào nút Add to Basket */
+.button-animation {
+  animation: pulse 1s infinite;
+}
+
+/* Định nghĩa keyframes cho animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+.button.button.b_basket_button-animation {
+  margin: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  background-color: #53a93f;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.button.b_basket:hover {
+  background-color: #439a36;
+  transform: scale(1.05);
+}
+
+.button-animation {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}

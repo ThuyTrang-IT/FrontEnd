@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+// Search.jsx
+
+import React, { useState } from "react";
 import { MdClose, MdSearch } from "react-icons/md";
 import "./Search.scss";
-import useFetch from "../../../hooks/useFetch";
+//import { fetchDataFromApi } from "../../../utils/api";
 import { useNavigate } from "react-router-dom";
-
 
 const Search = ({ setShowSearch }) => {
   const [query, setQuery] = useState("");
@@ -14,19 +15,21 @@ const Search = ({ setShowSearch }) => {
     setQuery(e.target.value);
   };
 
+   const handleSearch = async () => {
+    try {
+      if (!query.length) {
+        setSearchResults([]);
+        return;
+      }
 
-  const handleSearch = () => {
-    // Thực hiện tìm kiếm và lưu kết quả vào biến trạng thái searchResults
-    /* let { data } = useFetch(
-      `/api/products?populate=*&[filters][title][$contains]=${query}`
-    ); */
-
-    /* if (!query.length) {
-      data = null;
+      const endpoint = `/products/search/${query}`; // Đảm bảo rằng đường dẫn đúng với endpoint trên backend
+      //const data = await fetchDataFromApi(endpoint);
+      //setSearchResults(data || []);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      setSearchResults([]);
     }
-
-    setSearchResults(data?.data || []); */
-  };
+  }; 
 
   return (
     <div className="search-modal">
@@ -39,7 +42,7 @@ const Search = ({ setShowSearch }) => {
           placeholder="Search For Products..."
         />
         <button onClick={handleSearch}>
-          <MdSearch /> {/* Sử dụng biểu tượng kính lúp */}
+          <MdSearch />
         </button>
         <MdClose onClick={() => setShowSearch(false)} />
       </div>
@@ -47,22 +50,21 @@ const Search = ({ setShowSearch }) => {
         <div className="search-results">
           {searchResults.map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="search-result-item"
               onClick={() => {
-                navigate("/product/" + item.id);
+                navigate("/product/" + item._id);
                 setShowSearch(false);
               }}
             >
               <div className="img-container">
                 <img
-                  src={item.attributes.img.data[0].attributes.url}
+                  src={item.imageSrc}
                   alt="searched-item"
                 />
               </div>
               <div className="product-details">
-                <span className="name">{item.attributes.title}</span>
-                <span className="desc">{item.attributes.desc}</span>
+                <span className="name">{item.name}</span>
               </div>
             </div>
           ))}

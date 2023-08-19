@@ -1,4 +1,5 @@
 import React from "react";
+import { saveCustomerInfo } from "../../utils/apiCustomer"; // Đảm bảo bạn đúng đường dẫn đến tệp api.js
 
 const Personal = ({
   customerInfo,
@@ -7,6 +8,21 @@ const Personal = ({
   handleTermsChange,
   handleStageChange,
 }) => {
+  const handleContinue = async () => {
+    try {
+      // Gửi thông tin khách hàng lên server
+      const response = await saveCustomerInfo(customerInfo);
+
+      // Xử lý phản hồi từ server (nếu cần)
+      console.log(response);
+
+      // Chuyển đến trang thanh toán (nếu thành công)
+      handleStageChange("Payment");
+    } catch (error) {
+      console.error("Error saving customer info:", error);
+    }
+  };
+
   return (
     <div>
       <h2>Thông tin khách hàng</h2>
@@ -73,7 +89,7 @@ const Personal = ({
         </div>
       </div>
 
-      <button className="continue" onClick={() => handleStageChange("Payment")}>
+      <button className="continue" onClick={handleContinue}>
         Continue
       </button>
     </div>

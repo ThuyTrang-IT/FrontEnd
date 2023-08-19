@@ -12,7 +12,7 @@ export const productsByCategory = {
     {
       id: 1,
       imageSrc: "https://www.headset-store.co.uk/user/products/Jabra%20Evolve%2065%20MS%20Stereo%20PC%20Headset-1.jpg",
-      label: "Jabra Evolve 65 SE MS Stereo Wireless PC & Bluetooth Headset",
+      ProductName: "Jabra Evolve 65 SE MS Stereo Wireless PC & Bluetooth Headset",
       price: "61.05",
       description:
         "The Jabra Evolve 65 SE MS Stereo PC Headset is designed for use with PC and mobile phone/tablet applications. With state-of-the-art noise-cancelling technologies, the Jabra Evolve headset range is specially designed to improve conversation quality. Its noise-cancelling microphone eliminates annoying and distracting background sound, allowing you to be more focused on your calls. The E-STD standard microphone sensitivity is comparable to a normal telephone receiver, ensuring that no sound quality is lost by using a headset. Additionally, Wideband audio and Digital Signal Processing (DSP) technologies help to suppress echoes and clearly transmit your voice and music, to offer the highest quality experience, not only for softphone calls but also for music streaming.",
@@ -56,7 +56,7 @@ export const productsByCategory = {
     {
       id: 2,
       imageSrc: "https://www.headset-store.co.uk/user/products/Plantronics%203220.jpg",
-      label: "Plantronics Blackwire c3220 Stereo USB Headset",
+      ProductName: "Plantronics Blackwire c3220 Stereo USB Headset",
       price: "20.50",
       description:
         "The Plantronics Blackwire c3220 Stereo USB Headset is a versatile and durable headset designed for all-day use. It features a noise-cancelling microphone that helps reduce background noise for clear and professional-quality calls. The comfortable and lightweight design makes it ideal for extended wear, and the inline controls allow for easy call management and volume adjustment. Whether you're working from home or in the office, the Plantronics Blackwire c3220 is a reliable choice for all your communication needs.",
@@ -95,7 +95,7 @@ export const productsByCategory = {
     {
       id: 3,
       imageSrc: "https://www.headset-store.co.uk/user/products/large/headsets/EPOS%20Sennheiser/epos_pc8_2023_1.jpg",
-      label: "Sennheiser PC 8 USB Headset",
+      ProductName: "Sennheiser PC 8 USB Headset",
       price: "22.95",
       description:[
       "The Sennheiser PC 8 USB headset is a great value, convenient binaural PC headset for internet-based calls. With simple Plug and Play installation via the USB cable, you can connect it to your computer easily and start chatting and calling on the internet (Skype, VoIPbuster etc...) straight away. This PC 8 headset allows you to enjoy calls hands-free without breaking the bank. Its light and practical binaural style headset lets you focus all your attention on your conversations, isolating external noise"   ]     ,
