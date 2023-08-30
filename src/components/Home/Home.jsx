@@ -11,7 +11,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
-  const [uniqueTypes, setUniqueTypes] = useState([]);
 
   useEffect(() => {
     fetchCategoriesAndProducts();
@@ -22,11 +21,8 @@ const Home = () => {
       const categoriesResponse = await fetchCategoryData(); // Fetch categories from backend
       const categoriesData = categoriesResponse.data;
 
-      const uniqueTypes = Array.from(new Set(categoriesData.map(category => category.fields.type))); // Lấy các loại danh mục duy nhất
-
       setCategories(categoriesData);
-      setUniqueTypes(uniqueTypes);
-      
+
       const productsResponse = await fetchProductData(); // Fetch products from backend
       const productsData = productsResponse.data.items;
 
@@ -45,19 +41,6 @@ const Home = () => {
       <div className="main-content">
         <div className="cf-title-01">
           <h2>Popular Products</h2>
-        </div>
-
-        <div>
-          {uniqueTypes.map((type) => (
-            <div key={type}>
-              <h3>{type}</h3>
-              <Products
-                products={products.filter(
-                  (product) => product.fields.productsByCategory === type
-                )}
-              />
-            </div>
-          ))}
         </div>
 
         {/* Hiển thị tất cả sản phẩm trên trang chủ */}
