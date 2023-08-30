@@ -1,9 +1,11 @@
 import React, { useState, useContext } from "react";
-import { CreatedContext } from "../../utils/Context"; // Điều chỉnh đường dẫn đến AppContext
+import { CreatedContext } from "../../utils/Context";
 import "../Products/ProductSingleAction.scss";
-
+import { useParams } from "react-router-dom";
 const ProductSingleAction = ({ product, setShowCart }) => {
   const { handleAddToCart } = useContext(CreatedContext);
+  const { productId } = useParams(); // Lấy tham số productId từ URL
+
   const [labelText, setLabelText] = useState("Add Headset Carry Bag");
   const [quantity, setQuantity] = useState(1);
 
@@ -12,24 +14,24 @@ const ProductSingleAction = ({ product, setShowCart }) => {
     if (selectedValue === "327") {
       setLabelText("Add Headset Carry Bag");
     } else if (selectedValue === "326") {
-      setLabelText("Include Headset Carry Bag - (Quick Code: 15154): + £3.95");
+      setLabelText(
+        "Include Headset Carry Bag - (Quick Code: 15154): + £3.95"
+      );
     }
   };
 
   const handleDecreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : prevQuantity));
   };
-
+  
   const handleIncreaseQuantity = () => {
-    setQuantity(quantity + 1);
+    setQuantity((prevQuantity) => prevQuantity + 1);
   };
+  
 
   const addToBasket = () => {
-    // Tạo object mới chứa thông tin sản phẩm
     const newCartItem = {
-      id: product.id,
+      id: productId,
       imageSrc: product.imageSrc,
       attributes: {
         title: product.ProductName,
@@ -37,20 +39,26 @@ const ProductSingleAction = ({ product, setShowCart }) => {
         quantity: quantity,
       },
     };
-    // Gọi hàm handleAddToCart để thêm sản phẩm vào giỏ hàng
+    
     handleAddToCart(newCartItem);
-
-    // Mở hộp thoại Cart khi người dùng thêm sản phẩm vào giỏ hàng
     setShowCart(true);
   };
   
-  console.log("Products:", product);
+
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(price);
+  };
 
   return (
     <div className="product-single-action">
       {/* Nội dung của ProductSingleAction */}
       <div className="product-single-options">
-        <div className="product-single-price">£{product.price}</div>
+      <div className="product-single-price">
+        {formatPrice(product.price)}
+      </div>
         <table className="options m_form">
           <tbody>
             <tr>

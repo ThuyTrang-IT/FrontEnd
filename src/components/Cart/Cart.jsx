@@ -13,36 +13,29 @@ import "tailwindcss/tailwind.css";
 import "../Cart/Cart.scss";
 
 const Cart = ({ setShowCart }) => {
-  const { cartItems, cartSubTotal } = useContext(CreatedContext);
+  const { cartItems, cartSubTotal,cartQuantities  } = useContext(CreatedContext);
   
   const stripePromise = loadStripe(
     `${process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}`
   );
 
-  /* const handlePayment = async () => {
-    try {
-      const stripe = await stripePromise;
-
-      const res = await makePaymentRequest.post("/api/orders", {
-        products: cartItems,
-      });
-      await stripe.redirectToCheckout({
-        sessionId: res.data.stripeSession.id,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  }; */
   const navigate = useNavigate();
 
   const handleCheckout = () => {
-    navigate("/checkout");
+    // Chuyển dữ liệu sản phẩm tới trang thanh toán qua route
+    navigate("/checkout", { state: { cartItems, cartSubTotal } });
   };
 
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(price);
+  };
 
   return (
     <div className="cart-panel">
-      <div className="opacity-layer"></div>
+     
       <div className="cart-content">
         <div className="cart-header bg-gray-200 p-3 flex justify-between items-center">
           <span className="heading text-lg">Shopping Cart</span>
@@ -68,9 +61,9 @@ const Cart = ({ setShowCart }) => {
           </div>
         ) : (
           <>
-            {cartItems.map((item) => (
-              <CartItem key={item.id} product={item} />
-            ))}
+            
+              <CartItem />
+            
 
             <div className="cart-footer">
               <div className="subtotal">
@@ -79,7 +72,7 @@ const Cart = ({ setShowCart }) => {
                   className="total"
                   style={{ fontSize: "20px", fontWeight: "bold" }}
                 >
-                  £{cartSubTotal}
+                  {formatPrice(cartSubTotal)}
                 </span>
               </div>
               <div className="button">

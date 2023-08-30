@@ -22,7 +22,7 @@ export const savePaymentInfo = async (customerInfo, paymentInfo) => {
   }
 };
 
-export const fetchLarkSuiteData = async () => {
+export const fetchCustomerData = async () => {
   try {
     const response = await api.get("/api/customer");
     return response.data;

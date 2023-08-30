@@ -6,7 +6,7 @@ import "../CartItem/CartItem.scss";
 const CartItem = () => {
   const { cartItems, handleCartProductQuantity, handleRemoveFromCart } =
     useContext(CreatedContext);
-
+    console.log("cartItems:", cartItems);
   const cartCount = cartItems.reduce(
     (total, item) => total + item.attributes.quantity,
     0
@@ -15,6 +15,12 @@ const CartItem = () => {
   if (!cartItems || cartItems.length === 0) {
     return <div>Your cart is empty.</div>;
   }
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(price);
+  };
 
   return (
     <table className="cart-products-table">
@@ -56,7 +62,7 @@ const CartItem = () => {
                 <span>{item.attributes.quantity}</span>
                 <span>x</span>
                 <span className="highlight">
-                  &nbsp;&nbsp;&nbsp; {item.attributes.price}
+                  &nbsp;&nbsp;&nbsp; {formatPrice(item.attributes.price)}
                 </span>
               </div>
             </td>

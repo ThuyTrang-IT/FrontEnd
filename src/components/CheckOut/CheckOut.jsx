@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import "../CheckOut/CheckOut.scss"; // Đảm bảo rằng đường dẫn đúng tới tệp SCSS của bạn
 import CartItem from "../Cart/CartItem/CartItem";
 import { Checkbox } from "@chakra-ui/react";
 import Personal from "./Personal";
 import Payment from "./Payment";
+import Success from "../SuccessPage/SuccessPage";
 
 const Checkout = () => {
   const [fullName, setFullName] = useState("");
@@ -16,7 +19,7 @@ const Checkout = () => {
   const [paymentInfo, setPaymentInfo] = useState({});
   const [termsAccepted, setTermsAccepted] = useState(false);
 
-  const stages = ["Personal", "Payment", "Completed"];
+  const stages = ["Personal", "Payment", "Success"];
 
   const handleStageChange = (newStage) => {
     if (currentStage === "Personal" && !termsAccepted) {
@@ -54,6 +57,10 @@ const Checkout = () => {
     });
     // Thực hiện các xử lý liên quan đến việc thanh toán và hoàn thành đơn hàng ở đây
   };
+  
+
+ 
+  
 
   return (
     <div className="checkout">
@@ -94,6 +101,10 @@ const Checkout = () => {
               handlePaymentInfoChange={handlePaymentInfoChange}
               handleSubmit={handleSubmit}
             />
+          )}
+          {currentStage === "Success" && (
+            <Success customerInfo={customerInfo} 
+            paymentInfo={paymentInfo} />
           )}
         </div>
 

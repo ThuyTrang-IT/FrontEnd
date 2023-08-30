@@ -6,8 +6,8 @@ import Newsletter from "./components/Footer/Newsletter/Newsletter.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import AppContext from "./utils/Context";
 import PageNotFound from "./components/pagenotfound/PageNotFound.jsx";
-import SuccessPage from "./components/paymentPage/SuccessPage.jsx";
-import RejectedPage from "./components/paymentPage/RejectedPage.jsx";
+import SuccessPage from "./components/SuccessPage/SuccessPage.jsx";
+import RejectedPage from "./components/SuccessPage/RejectedPage.jsx";
 import ProductDetail from "./components/Products/ProductDetail.jsx";
 import Checkout from "./components/CheckOut/CheckOut.jsx";
 

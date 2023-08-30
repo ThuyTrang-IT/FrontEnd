@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Loader from "../loader/Loader.jsx";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { fetchCategoryData } from "../../utils/apiCategory.js";
-import { fetchProductData } from "../../utils/apiProduct.js"; // Import the API function for fetching products
-import "./Category.scss"; // Import file CSS của trang
-import { Link } from "react-router-dom";
+import { fetchProductData } from "../../utils/apiProduct.js";
+import "./Category.scss";
+
 const Category = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]); // State to store products
-  const { id } = useParams(); // Lấy giá trị tham số id từ URL
+  const [products, setProducts] = useState([]);
+  const { id } = useParams();
 
   useEffect(() => {
     fetchCategories();
-    fetchProductsByCategory(); // Fetch products by category
-  }, [id]); // Sử dụng id trong dependency array để tái-fetch khi thay đổi id
+    fetchProductsByCategory();
+  }, [id]);
 
   const fetchCategories = async () => {
     try {
@@ -41,7 +41,12 @@ const Category = () => {
       console.error("Error fetching products:", error);
     }
   };
-
+  const formatPrice = (price) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(price);
+  };
   return (
     <div className="category-container">
       {isLoading ? (
@@ -57,7 +62,7 @@ const Category = () => {
           </ul>
           <div className="product-list">
             {products.map((product) => (
-              <div key={product.id} className="product-item">
+              <div key={product.id} className="product-loop-item">
                 <img
                   src={product.fields.imageSrc.link}
                   alt={product.fields.ProductName}
@@ -72,16 +77,14 @@ const Category = () => {
                   }}
                 />
                 <h3 className="product-name">
-                  <h3 className="product-name">
-                    <Link
-                      to={`/product/${id}/${product.id}`}
-                      title={product.fields.ProductName}
-                    >
-                      {product.fields.ProductName}
-                    </Link>
-                  </h3>
+                  <Link
+                    to={`/product/${id}/${product.id}`}
+                    title={product.fields.ProductName}
+                  >
+                    {product.fields.ProductName}
+                  </Link>
                 </h3>
-                <p className="product-price">{`£${product.fields.price}`}</p>
+                <p className="product-price">{formatPrice(product.fields.price)}</p>
               </div>
             ))}
           </div>
