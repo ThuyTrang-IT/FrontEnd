@@ -45,7 +45,7 @@ export default function Payment(props) {
   const fullNameParts = customerInfo.fullName.split(" ");
   const firstName = fullNameParts[0];
   const lastName = fullNameParts.slice(1).join(" ");
-  const goodsNames = cartItems.map(item => item.attributes.title).join(',');
+  const goodsNames = cartItems.map(item => item.attributes.title).join('%20&goodsNm=%20');
 
   console.log("san pham",goodsNames);
   
@@ -62,7 +62,7 @@ export default function Payment(props) {
         <input type="hidden" name="invoiceNo" value={invoiceNo} />
         <input type="hidden" name="amount" value={amount} />
         <input type="hidden" name="currency" value="VND" />
-        <input type="hidden" name="goodsNm" value="Product" />
+        <input type="hidden" name="goodsNm" value={goodsNames} />
 
         <input type="hidden" name="fee" value="0" />
         <input type="hidden" name="buyerFirstNm" value={firstName} />

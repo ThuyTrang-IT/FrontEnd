@@ -61,9 +61,8 @@ function Success() {
   console.log("Customer data set:", customerData);
 
   const fullName = `${paymentResult.buyerFirstNm} ${paymentResult.buyerLastNm}`;
-  const goodsNamesEncoded = queryParams.get("goodsNm");
-  const goodsNamesDecoded = decodeURIComponent(goodsNamesEncoded);
-  const goodsNames = goodsNamesDecoded.split(",");
+  
+  const goodsNames = queryParams.get("goodsNm");
 
   console.log("Danh sách tên sản phẩm:", goodsNames);
 
